@@ -1,7 +1,6 @@
 # PORTAFOLIO PARA EL PROJECTO DE IA
 
 ![Badge](https://img.shields.io/badge/versión-1.0.0-neon)
-![Badge](https://img.shields.io/badge/tecnologías-HTML5%20%7C%20CSS3%20%7C%20JS-ff69b4)
 
 **Portafolio profesional de una sola página (Single Page Application) construido con DeekSeek.**
 
