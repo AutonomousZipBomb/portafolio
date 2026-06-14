@@ -52,6 +52,6 @@ El propósito de este portafolio es demostrar, a través del propio código, el 
 
   ## Enlaces del Proyecto
 
-  **Github:** https://autonomouszipbomb.github.io/portafolio/
+  **GitHub:** https://autonomouszipbomb.github.io/portafolio/
   
   **Vercel:** https://portafolio-neon-three-68.vercel.app/
