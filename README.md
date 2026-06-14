@@ -33,6 +33,10 @@ El propósito de este portafolio es demostrar, a través del propio código, el 
 
 ---
 
+<img width="1920" height="1080" alt="Screenshot 2026-06-14 180201" src="https://github.com/user-attachments/assets/540ed337-f386-41f3-9684-6ac125720665" />
+
+---
+
 ## Características Principales
 
 - **Modo oscuro**  
