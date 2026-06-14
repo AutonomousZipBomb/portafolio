@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio profesional de Keisy Reyes - Estudiante de Ingeniería en Sistemas | Desarrollo Web, Apps y Diseño UI/UX">
+    <meta name="keywords" content="Keisy Reyes, Ingeniería en Sistemas, Desarrollo Web, HTML5, CSS3, JavaScript, Portafolio, Ciberpunk">
+    <meta name="author" content="Keisy Reyes">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:title" content="Keisy Reyes | Portafolio Profesional">
+    <meta property="og:description" content="Estudiante de Ingeniería en Sistemas - Desarrollo Web & UI/UX">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/271863792?v=4">
+    <meta property="og:type" content="website">
+    <title>Keisy Reyes | Portafolio Ciberpunk 🖥️</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        :root {
+            --bg-dark: #050510;
+            --bg-dark-card: #0a0a1a;
+            --bg-dark-section: #08081a;
+            --text-dark-primary: #e0e0e0;
+            --text-dark-secondary: #c8c8d0;
+            --text-dark-heading: #ffffff;
+            --neon-cyan: #00e5ff;
+            --neon-blue: #4da8ff;
+            --neon-yellow: #ffd740;
+            --neon-green: #69f0ae;
+            --neon-pink: #ff6ec7;
+            --neon-purple: #b388ff;
+            --border-dark: #1a2a3a;
+            --border-glow: rgba(0, 229, 255, 0.4);
+            --shadow-dark: 0 4px 25px rgba(0, 0, 0, 0.6);
+            --shadow-glow: 0 0 20px rgba(0, 229, 255, 0.25);
+            --btn-primary-bg: #1e88e5;
+            --btn-primary-text: #ffffff;
+            --transition-speed: 0.35s;
+        }
+
+        .light-mode {
+            --bg-dark: #f4f6fb;
+            --bg-dark-card: #ffffff;
+            --bg-dark-section: #eef1f7;
+            --text-dark-primary: #1a1a2e;
+            --text-dark-secondary: #2a2a40;
+            --text-dark-heading: #0a0a18;
+            --neon-cyan: #0077b6;
+            --neon-blue: #0056b3;
+            --neon-yellow: #c79100;
+            --neon-green: #1b7a3d;
+            --neon-pink: #b83260;
+            --neon-purple: #5e35b1;
+            --border-dark: #ccd5e0;
+            --border-glow: rgba(0, 119, 182, 0.5);
+            --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.12);
+            --shadow-glow: 0 0 18px rgba(0, 119, 182, 0.3);
+            --btn-primary-bg: #1e88e5;
+            --btn-primary-text: #ffffff;
+        }
+
+        * {
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-dark-primary);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Canvas Matrix */
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+        .light-mode #matrixCanvas {
+            opacity: 0.18;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border-dark);
+            box-shadow: var(--shadow-dark);
+            z-index: 1050;
+            padding: 10px 0;
+        }
+        .light-mode .navbar {
+            background: rgba(255, 255, 255, 0.88);
+            border-bottom: 1px solid var(--border-dark);
+            box-shadow: 0 2px 18px rgba(0, 0, 0, 0.08);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--neon-cyan) !important;
+            letter-spacing: 1px;
+            text-shadow: 0 0 12px var(--neon-cyan);
+        }
+        .light-mode .navbar-brand {
+            text-shadow: 0 0 8px rgba(0, 119, 182, 0.5);
+        }
+        .navbar-nav .nav-link {
+            color: var(--text-dark-primary) !important;
+            font-weight: 500;
+            margin: 0 6px;
+            position: relative;
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: var(--neon-cyan) !important;
+            background: rgba(0, 229, 255, 0.08);
+        }
+        .light-mode .navbar-nav .nav-link:hover {
+            background: rgba(0, 119, 182, 0.1);
+        }
+        .btn-mode-toggle {
+            border: 2px solid var(--neon-yellow);
+            color: var(--neon-yellow);
+            background: transparent;
+            border-radius: 50px;
+            padding: 6px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-mode-toggle:hover {
+            background: var(--neon-yellow);
+            color: #000;
+            box-shadow: 0 0 18px var(--neon-yellow);
+        }
+        .light-mode .btn-mode-toggle {
+            border-color: #c79100;
+            color: #c79100;
+        }
+        .light-mode .btn-mode-toggle:hover {
+            background: #c79100;
+            color: #fff;
+            box-shadow: 0 0 14px rgba(199, 145, 0, 0.6);
+        }
+
+        /* Hero Section */
+        #hero {
+            padding: 90px 0 70px;
+            position: relative;
+            background: transparent;
+        }
+        .hero-card {
+            background: var(--bg-dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: var(--shadow-dark), var(--shadow-glow);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+        }
+        .light-mode .hero-card {
+            box-shadow: var(--shadow-dark), var(--shadow-glow);
+        }
+        .hero-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+            flex-shrink: 0;
+        }
+        .light-mode .hero-img {
+            box-shadow: 0 0 25px rgba(0, 119, 182, 0.55);
+            border-color: var(--neon-blue);
+        }
+        .hero-content h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--text-dark-heading);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .light-mode .hero-content h1 {
+            text-shadow: 0 0 6px rgba(0, 119, 182, 0.35);
+        }
+        .hero-content .profession {
+            color: var(--neon-yellow);
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .hero-content .bio {
+            color: var(--text-dark-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+        @media (max-width: 768px) {
+            .hero-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark-heading);
+            text-align: center;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .light-mode .section-title {
+            text-shadow: 0 0 6px rgba(0, 119, 182, 0.3);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dark-secondary);
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+        }
+        .divider {
+            width: 70px;
+            height: 3px;
+            background: var(--neon-cyan);
+            margin: 8px auto 30px;
+            border-radius: 2px;
+            box-shadow: 0 0 14px var(--neon-cyan);
+        }
+
+        /* Stack */
+        .stack-card {
+            background: var(--bg-dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-dark);
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .stack-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 28px var(--border-glow);
+            border-color: var(--neon-cyan);
+        }
+        .stack-card i {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+        .stack-card span {
+            font-weight: 600;
+            color: var(--text-dark-heading);
+            font-size: 1.1rem;
+        }
+        .fa-html5 {
+            color: #e44d26;
+        }
+        .fa-css3-alt {
+            color: #264de4;
+        }
+        .fa-js {
+            color: #f7df1e;
+        }
+        .light-mode .stack-card span {
+            color: #0a0a18;
+        }
+
+        /* Proyectos */
+        .filter-btns .btn-filter {
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            background: transparent;
+            border-radius: 50px;
+            padding: 8px 22px;
+            margin: 4px 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btns .btn-filter.active,
+        .filter-btns .btn-filter:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 18px var(--neon-cyan);
+        }
+        .light-mode .filter-btns .btn-filter {
+            border-color: #0077b6;
+            color: #0077b6;
+        }
+        .light-mode .filter-btns .btn-filter.active,
+        .light-mode .filter-btns .btn-filter:hover {
+            background: #0077b6;
+            color: #fff;
+            box-shadow: 0 0 14px rgba(0, 119, 182, 0.5);
+        }
+        .project-card {
+            background: var(--bg-dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-dark);
+            transition: all 0.35s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--border-glow);
+            border-color: var(--neon-cyan);
+        }
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--border-dark);
+        }
+        .project-card .card-body {
+            padding: 18px;
+        }
+        .project-card .card-body h5 {
+            color: var(--text-dark-heading);
+            font-weight: 700;
+        }
+        .project-card .card-body p {
+            color: var(--text-dark-secondary);
+            font-size: 0.9rem;
+        }
+        .badge-category {
+            background: var(--neon-purple);
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+        .light-mode .badge-category {
+            background: #5e35b1;
+            color: #fff;
+        }
+
+        /* Experiencia */
+        .exp-card {
+            background: var(--bg-dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 28px 24px;
+            box-shadow: var(--shadow-dark);
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .exp-card:hover {
+            box-shadow: 0 0 22px var(--border-glow);
+            border-color: var(--neon-yellow);
+        }
+        .exp-card h5 {
+            color: var(--neon-yellow);
+            font-weight: 700;
+        }
+        .exp-card .company {
+            color: var(--neon-cyan);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .exp-card .date {
+            color: var(--text-dark-secondary);
+            font-size: 0.85rem;
+        }
+        .exp-card p {
+            color: var(--text-dark-secondary);
+            font-size: 0.9rem;
+        }
+        .light-mode .exp-card h5 {
+            color: #c79100;
+        }
+        .light-mode .exp-card .company {
+            color: #0077b6;
+        }
+
+        /* Videos */
+        .video-card {
+            background: var(--bg-dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-dark);
+            transition: all 0.35s;
+        }
+        .video-card:hover {
+            box-shadow: 0 0 22px var(--border-glow);
+            border-color: var(--neon-pink);
+        }
+        .video-card iframe {
+            width: 100%;
+            height: 220px;
+            border: none;
+        }
+        .video-card .video-title {
+            padding: 14px 16px;
+            color: var(--text-dark-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .video-card .video-title i {
+            color: var(--neon-pink);
+            margin-right: 6px;
+        }
+
+        /* Formulario */
+        #contacto .card {
+            background: var(--bg-dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            box-shadow: var(--shadow-dark);
+            padding: 30px;
+        }
+        .light-mode #contacto .card {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        #contacto .form-label {
+            color: var(--text-dark-heading);
+            font-weight: 600;
+        }
+        #contacto .form-control {
+            background: var(--bg-dark-section);
+            border: 1px solid var(--border-dark);
+            color: var(--text-dark-primary);
+            border-radius: 10px;
+            padding: 12px 16px;
+        }
+        #contacto .form-control:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 12px var(--border-glow);
+            outline: none;
+        }
+        .btn-submit {
+            background: #1e88e5;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 40px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 16px rgba(30, 136, 229, 0.5);
+        }
+        .btn-submit:hover {
+            background: #1565c0;
+            box-shadow: 0 0 28px rgba(30, 136, 229, 0.75);
+            transform: translateY(-2px);
+        }
+        #form-status {
+            font-weight: 600;
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark-card);
+            border-top: 1px solid var(--border-dark);
+            padding: 30px 0 20px;
+            text-align: center;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+        }
+        footer .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 1.6rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        footer .social-icons a:hover {
+            transform: scale(1.2);
+        }
+        .social-icons .fa-linkedin {
+            color: #0a66c2;
+        }
+        .social-icons .fa-youtube {
+            color: #ff0000;
+        }
+        .social-icons .fa-github {
+            color: #f0f6fc;
+        }
+        .social-icons .fa-whatsapp {
+            color: #25d366;
+        }
+        .social-icons .fa-instagram {
+            color: #e1306c;
+        }
+        .social-icons .fa-facebook {
+            color: #1877f2;
+        }
+        .social-icons .fa-twitter {
+            color: #1da1f2;
+        }
+        .light-mode .social-icons .fa-github {
+            color: #24292e;
+        }
+        footer p {
+            color: var(--text-dark-secondary);
+            margin-top: 14px;
+            font-size: 0.9rem;
+        }
+        .btn-back-top {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-back-top:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .hero-content h1 {
+                font-size: 1.7rem;
+            }
+            .video-card iframe {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Matrix -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">⚡ KEISY REYES</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border-color: var(--neon-cyan);">
+                <span class="navbar-toggler-icon" style="filter: invert(0.8);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#hero">🏠 Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#stack">💻 Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proyectos">📂 Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experiencia">🏢 Experiencia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#videos">🎥 Videos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">📧 Contacto</a></li>
+                    <li class="nav-item ms-2">
+                        <button class="btn-mode-toggle" id="modeToggle" title="Cambiar modo Dark/Light">
+                            🌙 <span id="modeText">Dark</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-card">
+                <img src="https://avatars.githubusercontent.com/u/271863792?v=4" alt="Keisy Reyes" class="hero-img" loading="lazy">
+                <div class="hero-content">
+                    <h1>👩‍💻 Keisy Reyes</h1>
+                    <p class="profession">🖥️ Estudiante de Ingeniería en Sistemas</p>
+                    <p class="bio">
+                        🚀 Desarrolladora apasionada por el diseño minimalista y responsivo, enfocada en buenas prácticas de código limpio, accesibilidad y rendimiento. Construyo experiencias web modernas con <strong>HTML5, CSS3 y JavaScript</strong>, fusionando estética ciberpunk con funcionalidad intuitiva. Creo en la simplicidad elegante que resuelve problemas complejos. 🌌
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stack Tecnológico -->
+    <section id="stack" class="py-5">
+        <div class="container">
+            <h2 class="section-title">⚙️ Stack Tecnológico</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">🛠️ Herramientas que utilizo para construir soluciones digitales</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 col-sm-6">
+                    <div class="stack-card">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="stack-card">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="stack-card">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos" class="py-5">
+        <div class="container">
+            <h2 class="section-title">📂 Proyectos Destacados</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">🌟 Organizados por categorías: Web, App y Diseño</p>
+            <div class="filter-btns text-center mb-4">
+                <button class="btn-filter active" data-filter="all">🌐 Todos</button>
+                <button class="btn-filter" data-filter="web">🖥️ Web</button>
+                <button class="btn-filter" data-filter="app">📱 App</button>
+                <button class="btn-filter" data-filter="diseno">🎨 Diseño</button>
+            </div>
+            <div class="row g-4" id="projectsGrid">
+                <!-- Web 1 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="web">
+                    <div class="project-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfL-Leyd1Rp13h1HyEApEY-vFUt54iFN6Ycw&s" alt="Proyecto Web 1" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">🖥️ Web</span>
+                            <h5 class="mt-2">Landing Page Moderna</h5>
+                            <p>Diseño responsivo con animaciones suaves y formulario de contacto integrado.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Web 2 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="web">
+                    <div class="project-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPLsf6mCKkQ4Ns2IOGdnTL6oDQR4KNIAdUbw&s" alt="Proyecto Web 2" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">🖥️ Web</span>
+                            <h5 class="mt-2">Dashboard Interactivo</h5>
+                            <p>Panel de control con gráficos dinámicos y modo oscuro integrado.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Web 3 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="web">
+                    <div class="project-card">
+                        <img src="https://i.ytimg.com/vi/ukiGFmZ32YA/maxresdefault.jpg" alt="Proyecto Web 3" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">🖥️ Web</span>
+                            <h5 class="mt-2">E-commerce Minimalista</h5>
+                            <p>Tienda online con carrito funcional y diseño limpio enfocado en UX.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- App 1 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="app">
+                    <div class="project-card">
+                        <img src="https://atomicwallet.io/images/wallets/cryptocurrency_bitcoin_wallet.webp" alt="Proyecto App 1" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">📱 App</span>
+                            <h5 class="mt-2">Wallet Crypto UI</h5>
+                            <p>Interfaz de billetera digital con diseño futurista y transacciones simuladas.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- App 2 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="app">
+                    <div class="project-card">
+                        <img src="https://images01.nicepagecdn.com/page/12/93/website-template-preview-1293170.jpg" alt="Proyecto App 2" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">📱 App</span>
+                            <h5 class="mt-2">App de Tareas</h5>
+                            <p>Gestor de tareas con almacenamiento local y notificaciones push.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- App 3 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="app">
+                    <div class="project-card">
+                        <img src="https://www.mitec.cz/wp/wp-content/uploads/2025/06/TMX_001.png" alt="Proyecto App 3" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">📱 App</span>
+                            <h5 class="mt-2">Sistema de Inventario</h5>
+                            <p>App de gestión con escaneo de códigos y base de datos en tiempo real.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Diseño 1 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="diseno">
+                    <div class="project-card">
+                        <img src="https://as2.ftcdn.net/jpg/02/75/03/05/1000_F_275030527_PNJeGbT0vASVdu5TXWLvqiIbGAwYUNFj.jpg" alt="Proyecto Diseño 1" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">🎨 Diseño</span>
+                            <h5 class="mt-2">UI Kit Ciberpunk</h5>
+                            <p>Componentes reutilizables con estética neon y tipografía moderna.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Diseño 2 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="diseno">
+                    <div class="project-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTooJuOvyQnfadbRxnHhJ-UMB-7cxXaNXPmng&s" alt="Proyecto Diseño 2" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">🎨 Diseño</span>
+                            <h5 class="mt-2">Rediseño de Marca</h5>
+                            <p>Identidad visual completa con logotipo, paleta de colores y guía de estilo.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Diseño 3 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="diseno">
+                    <div class="project-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCK2HLpYJaBkuJKUqtmlSzNc9V7Ziw8U3wew&s" alt="Proyecto Diseño 3" loading="lazy">
+                        <div class="card-body">
+                            <span class="badge-category">🎨 Diseño</span>
+                            <h5 class="mt-2">Posters Digitales</h5>
+                            <p>Colección de posters con ilustraciones vectoriales y tipografía experimental.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiencia Laboral -->
+    <section id="experiencia" class="py-5">
+        <div class="container">
+            <h2 class="section-title">🏢 Experiencia Laboral</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">💼 Trayectoria profesional y prácticas realizadas</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="exp-card">
+                        <h5>🔧 Desarrolladora Web Junior</h5>
+                        <p class="company">TechNova Solutions</p>
+                        <p class="date">📅 Enero 2024 - Presente</p>
+                        <p>Desarrollo de interfaces responsivas con HTML5, CSS3 y JavaScript. Implementación de buenas prácticas y optimización SEO.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="exp-card">
+                        <h5>🎨 Practicante de UI/UX</h5>
+                        <p class="company">DigitalCraft Studio</p>
+                        <p class="date">📅 Junio 2023 - Diciembre 2023</p>
+                        <p>Diseño de prototipos interactivos, pruebas de usabilidad y creación de componentes visuales para aplicaciones web.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="exp-card">
+                        <h5>📚 Soporte Técnico IT</h5>
+                        <p class="company">Universidad Central</p>
+                        <p class="date">📅 Marzo 2022 - Mayo 2023</p>
+                        <p>Soporte a laboratorios de cómputo, mantenimiento de equipos y asistencia en plataformas educativas virtuales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Destacados -->
+    <section id="videos" class="py-5">
+        <div class="container">
+            <h2 class="section-title">🎥 Videos Destacados</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">📹 Tutoriales y proyectos en video que he creado</p>
+            <div class="row g-4">
+                <!-- Video 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="https://www.youtube.com/embed/pn4ZTSpeHwE?si=JXQN1LzlrZD5_ZSC" title="CRUD en .NET MAUI con SQL Server - Parte 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title">
+                            <i class="fas fa-code"></i> Desde Cero: CRUD en .NET MAUI con SQL Server y QuestPDF — PARTE #2 ⚙️
+                        </div>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="https://www.youtube.com/embed/V_CKAglsiQc?si=oIHwdgYAWlDro8M-" title="CRUD en .NET MAUI con SQL Server - Parte 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title">
+                            <i class="fas fa-database"></i> CRUD en .NET MAUI con BD SQL Server 5-Tablas y QuestPDF — PARTE #3 🔥
+                        </div>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="https://www.youtube.com/embed/5KaP4W0kVEQ?si=dfUe9vbNDDxOF1ym" title="IA desde CERO con Gemini API" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title">
+                            <i class="fas fa-robot"></i> 💻 Tu propia IA desde CERO con Gemini API | Interfaz Cyberpunk + Voz ⚡
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== VIDEOS ADICIONALES COMENTADOS (9) ========== -->
+                <!--
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_4" title="Video 4" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 4</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_5" title="Video 5" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 5</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_6" title="Video 6" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 6</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_7" title="Video 7" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 7</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_8" title="Video 8" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 8</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_9" title="Video 9" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 9</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_10" title="Video 10" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 10</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_11" title="Video 11" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 11</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card">
+                        <iframe src="URL_VIDEO_12" title="Video 12" allowfullscreen loading="lazy"></iframe>
+                        <div class="video-title"><i class="fas fa-video"></i> 🎥 Video Adicional 12</div>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section id="contacto" class="py-5">
+        <div class="container">
+            <h2 class="section-title">📧 Contacto</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">💬 ¿Tienes un proyecto en mente? ¡Hablemos!</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-10">
+                    <div class="card">
+                        <form id="contactForm" novalidate>
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label"><i class="fas fa-user"></i> 👤 Nombre Completo</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Keisy Reyes" required>
+                                <div class="invalid-feedback">⚠️ Por favor ingresa tu nombre completo.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label"><i class="fas fa-envelope"></i> 📧 Correo Electrónico</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                                <div class="invalid-feedback">⚠️ Ingresa un correo electrónico válido.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label"><i class="fas fa-phone"></i> 📞 Teléfono</label>
+                                <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="+1 829 475 2601" required>
+                                <div class="invalid-feedback">⚠️ Por favor ingresa tu número de teléfono.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensaje" class="form-label"><i class="fas fa-comment"></i> ✉️ Mensaje</label>
+                                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                                <div class="invalid-feedback">⚠️ El mensaje no puede estar vacío.</div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn-submit">🚀 Enviar</button>
+                            </div>
+                            <div id="form-status" class="mt-3"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/@K.R.-bp9ij" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/AutonomousZipBomb" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://wa.me/18294752601" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/justanunusedname/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/keisy.reyes.2000" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>© 2026 Keisy Reyes | 🖥️ Estudiante de Ingeniería en Sistemas | Todos los derechos reservados.</p>
+            <a href="#hero" class="btn-back-top">⬆️ Volver Arriba</a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script>
+        // ==================== MODO DARK/LIGHT ====================
+        (function() {
+            const body = document.body;
+            const modeToggle = document.getElementById('modeToggle');
+            const modeText = document.getElementById('modeText');
+            const icon = modeToggle.querySelector('span') ? modeToggle.innerHTML : '';
+
+            // Cargar preferencia guardada
+            const savedMode = localStorage.getItem('keisy-portfolio-mode');
+            if (savedMode === 'light') {
+                body.classList.add('light-mode');
+                modeToggle.innerHTML = '☀️ <span id="modeText">Light</span>';
+            } else {
+                body.classList.remove('light-mode');
+                modeToggle.innerHTML = '🌙 <span id="modeText">Dark</span>';
+            }
+
+            modeToggle.addEventListener('click', function() {
+                if (body.classList.contains('light-mode')) {
+                    body.classList.remove('light-mode');
+                    localStorage.setItem('keisy-portfolio-mode', 'dark');
+                    modeToggle.innerHTML = '🌙 <span id="modeText">Dark</span>';
+                } else {
+                    body.classList.add('light-mode');
+                    localStorage.setItem('keisy-portfolio-mode', 'light');
+                    modeToggle.innerHTML = '☀️ <span id="modeText">Light</span>';
+                }
+                // Redibujar matrix con nuevos colores
+                if (typeof matrixColor !== 'undefined') {
+                    updateMatrixColor();
+                }
+            });
+        })();
+
+        // ==================== FONDO MATRIX TRANSLÚCIDO ====================
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        let matrixColor = '#69f0ae';
+        let matrixOpacity = 0.35;
+
+        function updateMatrixColor() {
+            if (document.body.classList.contains('light-mode')) {
+                matrixColor = '#1b7a3d';
+                matrixOpacity = 0.18;
+            } else {
+                matrixColor = '#69f0ae';
+                matrixOpacity = 0.35;
+            }
+            canvas.style.opacity = matrixOpacity;
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        updateMatrixColor();
+
+        const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = [];
+
+        function initDrops() {
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * -1;
+            }
+        }
+        initDrops();
+        window.addEventListener('resize', initDrops);
+
+        function drawMatrix() {
+            updateMatrixColor();
+            ctx.fillStyle = document.body.classList.contains('light-mode') ?
+                'rgba(244, 246, 251, 0.12)' : 'rgba(5, 5, 16, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = matrixColor;
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                // Brillo variable
+                const brightness = Math.random() * 0.6 + 0.4;
+                ctx.fillStyle = matrixColor;
+                ctx.globalAlpha = brightness;
+                ctx.fillText(text, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            ctx.globalAlpha = 1;
+        }
+        setInterval(drawMatrix, 55);
+
+        // ==================== FILTRO DE PROYECTOS ====================
+        const filterBtns = document.querySelectorAll('.btn-filter');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+
+                projectItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Inicializar estilos de transición para proyectos
+        projectItems.forEach(item => {
+            item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        });
+
+        // ==================== FORMULARIO DE CONTACTO CON EMAILJS ====================
+        (function() {
+            emailjs.init('YOUR_PUBLIC_KEY'); // ⚠️ REEMPLAZA 'YOUR_PUBLIC_KEY' con tu clave pública de EmailJS
+
+            const form = document.getElementById('contactForm');
+            const formStatus = document.getElementById('form-status');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Validación Bootstrap
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+                form.classList.add('was-validated');
+
+                // Mostrar estado de carga
+                formStatus.innerHTML =
+                    '<span style="color: var(--neon-yellow);">⏳ Enviando mensaje...</span>';
+
+                const templateParams = {
+                    from_name: document.getElementById('nombre').value.trim(),
+                    from_email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('telefono').value.trim(),
+                    message: document.getElementById('mensaje').value.trim(),
+                    to_email: 'keisyisnothere@gmail.com'
+                };
+
+                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                    .then(function(response) {
+                        formStatus.innerHTML =
+                            '<span style="color: var(--neon-green);">✅ Mensaje enviado correctamente</span>';
+                        form.reset();
+                        form.classList.remove('was-validated');
+                        setTimeout(() => {
+                            formStatus.innerHTML = '';
+                        }, 5000);
+                    }, function(error) {
+                        formStatus.innerHTML =
+                            '<span style="color: #ff5252;">❌ Error al enviar. Intenta de nuevo. (' + error
+                            .text + ')</span>';
+                        console.error('EmailJS Error:', error);
+                    });
+            });
+        })();
+
+        // ==================== SMOOTH SCROLL PARA VOLVER ARRIBA ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
