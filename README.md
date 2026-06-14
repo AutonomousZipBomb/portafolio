@@ -3,7 +3,7 @@
 ![Badge](https://img.shields.io/badge/versión-1.0.0-neon)
 ![Badge](https://img.shields.io/badge/tecnologías-HTML5%20%7C%20CSS3%20%7C%20JS-ff69b4)
 
-**Portafolio profesional de una sola página (Single Page Application) construido con tecnologías web puras. Diseño ciberpunk inmersivo con modo Dark/Light, fondo Matrix interactivo y formulario de contacto funcional.**
+**Portafolio profesional de una sola página (Single Page Application) construido con DeekSeek.**
 
 **Keisy Reyes**  
 23-SISN-8-065 - Sección 0710
@@ -44,3 +44,10 @@ El propósito de este portafolio es demostrar, a través del propio código, el 
 
 - **Filtro Dinámico de Proyectos:**  
   Sección de portafolio con 9 proyectos organizados en 3 categorías (`Web`, `App`, `Diseño`). Botones interactivos permiten filtrar el contenido al instante.
+
+  ---
+
+  ## Enlaces del Proyecto
+
+  Github: https://autonomouszipbomb.github.io/portafolio/
+  Vercel: https://portafolio-neon-three-68.vercel.app/
